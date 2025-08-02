@@ -1415,39 +1415,8 @@
       };
     }
 
-    // Botão de instalação PWA (A2HS)
-    let deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', (e)=>{
-      e.preventDefault();
-      deferredPrompt = e;
-      showInstallCTA();
-    });
-    function showInstallCTA(){
-      if(state.installing) return;
-      const btn = document.createElement('button');
-      btn.className = 'btn big accent';
-      btn.textContent = 'Instalar App';
-      btn.style.position = 'absolute';
-      btn.style.bottom = '14px';
-      btn.style.left = '50%';
-      btn.style.transform = 'translateX(-50%)';
-      btn.style.pointerEvents = 'auto';
-      const shell = document.querySelector('.game-shell');
-      shell.appendChild(btn);
-      const remove = ()=> { btn.remove(); };
-      btn.addEventListener('click', async ()=>{
-        if(!deferredPrompt) { showToast('Instalação indisponível'); return; }
-        state.installing = true;
-        deferredPrompt.prompt();
-        const choice = await deferredPrompt.userChoice;
-        if(choice.outcome === 'accepted'){ showToast('Instalando...'); }
-        deferredPrompt = null;
-        state.installing = false;
-        remove();
-      });
-      // remover se já instalado
-      window.addEventListener('appinstalled', ()=>{ remove(); showToast('App instalado'); });
-    }
+    // Removido o botão A2HS para não atrapalhar o jogo; ainda permitirá instalação via UI do navegador
+    // Mantemos listeners vazios apenas se desejado (opcional). Nada a fazer aqui.
 
     // Inicializar
     fitCanvas();
