@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="512" y2="512" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0b1a3a"/>
+      <stop offset="1" stop-color="#0c77ff"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(256 256) rotate(90) scale(210)">
+      <stop stop-color="#9edaff" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="0" stdDeviation="10" flood-color="#20a4ff" flood-opacity="0.65"/>
+    </filter>
+    <clipPath id="maskable-safe">
+      <!-- Safe zone (maskable) with ~12% padding -->
+      <rect x="60" y="60" width="392" height="392" rx="88" ry="88"/>
+    </clipPath>
+  </defs>
+
+  <!-- Background with subtle rounded-border stroke to look good as icon -->
+  <rect x="0" y="0" width="512" height="512" fill="url(#bg)" rx="92" ry="92"/>
+  <rect x="6" y="6" width="500" height="500" rx="86" ry="86" fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="4"/>
+
+  <!-- Soft glow -->
+  <circle cx="256" cy="256" r="210" fill="url(#glow)"/>
+
+  <!-- Stylized ship/star emblem in safe area -->
+  <g clip-path="url(#maskable-safe)" filter="url(#shadow)">
+    <!-- Central diamond/ship body -->
+    <path d="M256 116 L328 256 L256 396 L184 256 Z"
+          fill="url(#bg)" stroke="#bfe1ff" stroke-opacity="0.35" stroke-width="2"/>
+    <!-- Canopy highlight -->
+    <ellipse cx="256" cy="220" rx="32" ry="44" fill="rgba(255,255,255,0.85)"/>
+
+    <!-- Wings -->
+    <path d="M184 256 L124 286 L164 336 L184 300 Z" fill="#bfe1ff" fill-opacity="0.9"/>
+    <path d="M328 256 L388 286 L348 336 L328 300 Z" fill="#9cd3ff" fill-opacity="0.95"/>
+
+    <!-- Nose/flame -->
+    <path d="M228 360 L256 420 L284 360 Z"
+          fill="url(#flameGrad)"/>
+    <linearGradient id="flameGrad" x1="256" y1="360" x2="256" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffdc78" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#ff6428" stop-opacity="0.0"/>
+    </linearGradient>
+
+    <!-- Outer star flare -->
+    <g transform="translate(256 256) rotate(-90)">
+      <path d="
+        M 0 -128
+        L 28 -40
+        L 120 -40
+        L 44 10
+        L 72 100
+        L 0 50
+        L -72 100
+        L -44 10
+        L -120 -40
+        L -28 -40
+        Z"
+        fill="#eaf6ff"/>
+    </g>
+  </g>
+</svg>
