@@ -8,6 +8,8 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>Aerobatalha Vertical</title>
 <link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0a0e1a" />
+<link rel="apple-touch-icon" href="icons/icon-192.png">
 <style>
   :root {
     --bg: #0a0e1a;
@@ -1451,11 +1453,18 @@
     fitCanvas();
     initStars();
     renderIdle();
-    installManifest();
-    registerSW();
 
-    // criar um arquivo manifest físico em memória para navegadores que buscam URL "manifest.webmanifest"
-    // e roteá-lo via SW (cacheado). Também expor por link já configurado acima.
+    // Manifest gerado por código já cobre ícones base; manter arquivo físico para compatibilidade
+    installManifest();
+
+    // Registrar Service Worker físico (sw.js)
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js', { scope: './' })
+          .then(() => console.log('SW físico registrado'))
+          .catch(err => console.warn('Falha ao registrar SW físico:', err));
+      });
+    }
   </script>
 </body>
 </html>
